@@ -1,0 +1,226 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient Background */
+    color: #fff;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.game-wrapper {
+    width: 80%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.level-select {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.level-btn {
+    background-color: #f39c12; /* Orange color */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.level-btn:hover {
+    background-color: #e67e22; /* Darker Orange */
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    perspective: 1000px; /* Allow 3D effect for the flip */
+}
+
+/* Card Styles */
+.card {
+    width: 150px;
+    height: 150px;
+    background-color: #3498db; /* Card background color */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #ffffff;  /* Text color for the front side */
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+/* Card flip (3D effect) */
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Card Front */
+.card .card-front {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #3498db; /* Front color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #ffffff; /* Front text color */
+}
+
+/* Card Back */
+.card .card-back {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #2ecc71; /* Green back side of the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #ffffff; /* Text color for the back side */
+    transform: rotateY(180deg);
+}
+
+/* Matched Card Styles */
+.card.matched {
+    background-color: #9b59b6; /* Purple for matched cards */
+    pointer-events: none;
+    animation: glow 1s infinite;
+}
+
+/* Glow effect for matched cards */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #fff, 0 0 10px #9b59b6, 0 0 15px #9b59b6;
+    }
+    50% {
+        box-shadow: 0 0 10px #fff, 0 0 20px #9b59b6, 0 0 30px #9b59b6;
+    }
+    100% {
+        box-shadow: 0 0 5px #fff, 0 0 10px #9b59b6, 0 0 15px #9b59b6;
+    }
+}
+
+/* Winning Animation */
+@keyframes celebration {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
+    75% {
+        transform: scale(1.6);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+.game-status p {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.game-status.won p {
+    color: #2ecc71; /* Green when winning */
+    animation: celebration 2s forwards; /* Add a celebration effect */
+}
+
+#restart {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #e74c3c; /* Red restart button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#restart:hover {
+    background-color: #c0392b; /* Darker Red */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Timer */
+#timer {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+/* Overlay for Try Again */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+#overlay .overlay-content {
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .game-container {
+        grid-template-columns: repeat(4, 100px);
+        gap: 10px;
+    }
+
+    .card {
+        width: 100px;
+        height: 100px;
+    }
+}
